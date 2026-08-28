@@ -4,10 +4,10 @@ export default function LiquidCard({
   children,
   className = '',
   cornerRadius = 28,
-  displacementScale = 28,
+  displacementScale = 25,
   blurAmount = 0.08,
   saturation = 110,
-  aberrationIntensity = 1,
+  aberrationIntensity = 0.8,
   elasticity = 0.1,
 }) {
   return (
