@@ -1,32 +1,45 @@
-import { Link } from 'react-router-dom'
-import LiquidGlass from 'liquid-glass-react'
+import { Link, useLocation } from 'react-router-dom'
+import LiquidCard from './LiquidCard'
 
 export default function Navbar() {
+  const location = useLocation()
+
   return (
-    <header className="navbar-wrapper">
-      <LiquidGlass
-        displacementScale={35}
-        blurAmount={0.08}
-        saturation={120}
-        aberrationIntensity={1.5}
-        elasticity={0.15}
-        cornerRadius={24}
-        padding="0"
+    <header className="site-header">
+      <LiquidCard
+        className="navbar-glass"
+        cornerRadius={999}
+        displacementScale={18}
+        blurAmount={0.06}
+        aberrationIntensity={0.7}
       >
         <nav className="navbar">
-          <Link
-            to="/"
-            className="navbar-logo"
-          >
-            boxueduocai
+          <Link to="/" className="brand">
+            <span className="brand-icon">B</span>
+            <span className="brand-name">boxueduocai</span>
           </Link>
 
-          <div className="navbar-links">
-            <Link to="/">首页</Link>
-            <Link to="/about">关于</Link>
+          <div className="nav-links">
+            <Link
+              to="/"
+              className={location.pathname === '/' ? 'nav-active' : ''}
+            >
+              首页
+            </Link>
+
+            <Link
+              to="/about"
+              className={
+                location.pathname === '/about'
+                  ? 'nav-active'
+                  : ''
+              }
+            >
+              关于
+            </Link>
           </div>
         </nav>
-      </LiquidGlass>
+      </LiquidCard>
     </header>
   )
 }
