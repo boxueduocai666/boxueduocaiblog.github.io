@@ -4,36 +4,44 @@ import LiquidCard from './LiquidCard'
 export default function Navbar() {
   const location = useLocation()
 
+  const isHome = location.pathname === '/'
+  const isAbout = location.pathname === '/about'
+
   return (
-    <header className="site-header">
+    <header className="navbar-wrapper">
       <LiquidCard
         className="navbar-glass"
         cornerRadius={999}
-        displacementScale={18}
+        displacementScale={16}
         blurAmount={0.06}
-        aberrationIntensity={0.7}
+        aberrationIntensity={0.6}
       >
         <nav className="navbar">
-          <Link to="/" className="brand">
-            <span className="brand-icon">B</span>
-            <span className="brand-name">boxueduocai</span>
+          <Link
+            to="/"
+            className="navbar-logo"
+            aria-label="返回首页"
+          >
+            <span className="navbar-logo-mark">
+              B
+            </span>
+
+            <span>
+              boxueduocai
+            </span>
           </Link>
 
-          <div className="nav-links">
+          <div className="navbar-links">
             <Link
               to="/"
-              className={location.pathname === '/' ? 'nav-active' : ''}
+              className={isHome ? 'nav-active' : ''}
             >
               首页
             </Link>
 
             <Link
               to="/about"
-              className={
-                location.pathname === '/about'
-                  ? 'nav-active'
-                  : ''
-              }
+              className={isAbout ? 'nav-active' : ''}
             >
               关于
             </Link>
