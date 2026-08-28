@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="app">
       <Background />
-
       <Navbar />
 
       <main className="main-content">
