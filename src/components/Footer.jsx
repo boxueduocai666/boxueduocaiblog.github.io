@@ -1,13 +1,15 @@
 export default function Footer() {
   return (
-    <footer className="footer">
-      <p>
-        © 2026 boxueduocai
-      </p>
+    <footer className="site-footer">
+      <div className="footer-inner">
+        <div>
+          © 2026 boxueduocai
+        </div>
 
-      <p>
-        后来烟雨皆散尽，无人撑伞一人行
-      </p>
+        <div>
+          后来烟雨皆散尽，无人撑伞一人行
+        </div>
+      </div>
     </footer>
   )
 }
