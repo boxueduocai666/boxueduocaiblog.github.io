@@ -1,8 +1,42 @@
-import { useParams, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+
 import LiquidCard from '../components/LiquidCard'
+import { getPost } from '../posts'
 
 export default function Article() {
   const { id } = useParams()
+
+  const article = getPost(id)
+
+  if (!article) {
+    return (
+      <section className="article-page">
+        <LiquidCard className="article-container">
+          <Link
+            to="/"
+            className="back-link"
+          >
+            ← 返回首页
+          </Link>
+
+          <div className="article-not-found">
+            <span>
+              404
+            </span>
+
+            <h1>
+              找不到这篇文章
+            </h1>
+
+            <p>
+              这篇文章可能已经被删除，
+              或者链接地址不正确。
+            </p>
+          </div>
+        </LiquidCard>
+      </section>
+    )
+  }
 
   return (
     <section className="article-page">
@@ -14,29 +48,30 @@ export default function Article() {
           ← 返回首页
         </Link>
 
-        <p className="article-date">
-          2026-08-23
-        </p>
+        <div className="article-header">
+          <p className="article-date">
+            {article.date}
+          </p>
 
-        <h1>
-          ADB权限没那么难——普通人也能轻松上手
-        </h1>
+          <h1>
+            {article.title}
+          </h1>
+
+          {article.description && (
+            <p className="article-description">
+              {article.description}
+            </p>
+          )}
+        </div>
 
         <div className="article-content">
-          <p>
-            很多人第一次接触 ADB 时，
-            会觉得它非常复杂。
-          </p>
-
-          <p>
-            实际上，只要理解几个基本概念，
-            普通用户也可以很轻松地使用 ADB。
-          </p>
-
-          <p>
-            这篇文章就是从最基础的部分开始，
-            带你一步一步了解 ADB。
-          </p>
+          {article.content.map(
+            (paragraph, index) => (
+              <p key={index}>
+                {paragraph}
+              </p>
+            )
+          )}
         </div>
       </LiquidCard>
     </section>
