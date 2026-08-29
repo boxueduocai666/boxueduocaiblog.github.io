@@ -1,4 +1,7 @@
-import { Link, useParams } from 'react-router-dom'
+import {
+  Link,
+  useParams,
+} from 'react-router-dom'
 
 import LiquidCard from '../components/LiquidCard'
 import { getPost } from '../posts'
@@ -6,7 +9,8 @@ import { getPost } from '../posts'
 export default function Article() {
   const { id } = useParams()
 
-  const article = getPost(id)
+  const article =
+    getPost(id)
 
   if (!article) {
     return (
