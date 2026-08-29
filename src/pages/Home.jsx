@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import ArticleCard from '../components/ArticleCard'
-import LiquidCard from '../components/LiquidCard'
 import Footer from '../components/Footer'
+import LiquidCard from '../components/LiquidCard'
 
 import { posts } from '../posts'
 
@@ -22,6 +22,7 @@ export default function Home() {
           <span>
             我是 boxueduocai
           </span>
+
           <b>.</b>
         </h1>
 
@@ -52,11 +53,16 @@ export default function Home() {
       <section className="intro-section">
         <LiquidCard
           className="intro-card"
-          displacementScale={16}
-          aberrationIntensity={0.5}
+          displacementScale={10}
+          blurAmount={0.045}
+          saturation={120}
+          aberrationIntensity={0.3}
+          elasticity={0.04}
         >
           <div className="intro-number">
-            {String(posts.length).padStart(2, '0')}
+            {String(
+              posts.length
+            ).padStart(2, '0')}
           </div>
 
           <div className="intro-divider" />
@@ -95,12 +101,14 @@ export default function Home() {
 
         {posts.length > 0 ? (
           <div className="article-grid">
-            {posts.map((article) => (
-              <ArticleCard
-                key={article.id}
-                article={article}
-              />
-            ))}
+            {posts.map(
+              (article) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                />
+              )
+            )}
           </div>
         ) : (
           <LiquidCard className="empty-card">
