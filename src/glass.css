@@ -1,0 +1,192 @@
+/* =========================================================
+   Liquid Glass System
+   ========================================================= */
+
+.liquid-card {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  border-radius: 24px;
+
+  /*
+   * Liquid Glass 本体由 liquid-glass-react 提供折射。
+   * 这里负责补充材质层、边缘光和降级效果。
+   */
+
+  background:
+    rgba(255, 255, 255, 0.055);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    inset 0 1px 1px
+      rgba(255, 255, 255, 0.38),
+
+    inset 0 -1px 2px
+      rgba(0, 0, 0, 0.18),
+
+    0 16px 42px
+      rgba(0, 0, 0, 0.28);
+
+  transition:
+    transform 240ms ease,
+    filter 240ms ease,
+    border-color 240ms ease;
+}
+
+/*
+ * 顶部玻璃高光
+ */
+.liquid-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.025) 28%,
+      transparent 55%
+    );
+
+  opacity: 0.8;
+}
+
+/*
+ * 动态光晕
+ *
+ * 由 LiquidCard.jsx 更新
+ * --glass-x
+ * --glass-y
+ */
+.liquid-card::after {
+  content: "";
+
+  position: absolute;
+
+  left:
+    var(--glass-x, 50%);
+  top:
+    var(--glass-y, 0%);
+
+  z-index: 2;
+
+  width: 260px;
+  height: 260px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.035) 35%,
+      transparent 70%
+    );
+
+  filter: blur(18px);
+
+  opacity: 0;
+
+  transition:
+    opacity 300ms ease;
+}
+
+.liquid-card:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   Glass content layer
+   ========================================================= */
+
+.liquid-card > * {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* =========================================================
+   Performance
+   ========================================================= */
+
+@media (min-width: 769px) {
+  .liquid-card {
+    will-change: transform;
+  }
+}
+
+
+/* =========================================================
+   Browser fallback
+   ========================================================= */
+
+@supports not (
+  backdrop-filter: blur(1px)
+) {
+  .liquid-card {
+    background:
+      rgba(20, 20, 25, 0.86);
+
+    box-shadow:
+      0 16px 42px
+      rgba(0, 0, 0, 0.35);
+  }
+}
+
+
+/* =========================================================
+   Mobile performance
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .liquid-card {
+    box-shadow:
+      inset 0 1px 1px
+        rgba(255, 255, 255, 0.28),
+
+      inset 0 -1px 2px
+        rgba(0, 0, 0, 0.16),
+
+      0 10px 28px
+        rgba(0, 0, 0, 0.25);
+  }
+
+  .liquid-card::after {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   Reduced Motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-card,
+  .liquid-card::after {
+    transition: none;
+  }
+}
