@@ -15,8 +15,11 @@ export default function About() {
 
       <LiquidCard
         className="about-card"
-        displacementScale={20}
-        aberrationIntensity={0.6}
+        displacementScale={14}
+        blurAmount={0.055}
+        saturation={125}
+        aberrationIntensity={0.45}
+        elasticity={0.06}
       >
         <div className="about-avatar">
           B
