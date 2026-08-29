@@ -1,16 +1,14 @@
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-line" />
-
-      <div className="footer-content">
-        <span>
+      <div className="footer-inner">
+        <div>
           © 2026 boxueduocai
-        </span>
+        </div>
 
-        <span>
+        <div>
           后来烟雨皆散尽，无人撑伞一人行
-        </span>
+        </div>
       </div>
     </footer>
   )
