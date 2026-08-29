@@ -1,19 +1,25 @@
 import { Link } from 'react-router-dom'
+
 import LiquidCard from './LiquidCard'
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({
+  article,
+}) {
   return (
     <LiquidCard
       className="article-card"
-      displacementScale={20}
-      aberrationIntensity={0.6}
+      displacementScale={14}
+      blurAmount={0.055}
+      saturation={125}
+      aberrationIntensity={0.45}
+      elasticity={0.06}
     >
       <Link
         to={`/article/${article.id}`}
         className="article-card-link"
       >
-        <div className="article-card-top">
-          <span className="article-date">
+        <div className="article-meta">
+          <span>
             {article.date}
           </span>
 
@@ -22,10 +28,10 @@ export default function ArticleCard({ article }) {
           </span>
         </div>
 
-        <div className="article-card-content">
-          <h2>
+        <div className="article-main">
+          <h3>
             {article.title}
-          </h2>
+          </h3>
 
           {article.description && (
             <p>
@@ -34,7 +40,7 @@ export default function ArticleCard({ article }) {
           )}
         </div>
 
-        <div className="article-card-bottom">
+        <div className="article-read">
           <span>
             阅读文章
           </span>
